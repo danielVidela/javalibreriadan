@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es-AR" xmlns:th="https://www.thymeleaf.org">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+
+    <title>borrar</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="/css/fontawesome.css">
+    <link rel="stylesheet" href="/css/templatemo-sixteen.css">
+    <link rel="stylesheet" href="/css/owl.css">
+    <script>
+        //Cuadro de diálogo de confirmación en JavaScript
+        function confirmarBorrar() {
+            return confirm("¿Está seguro que desea borrar el Libro?");
+        }
+    </script>
+  </head>
+
+  <body>
+
+    <!-- ***** Preloader Start ***** 
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+     ***** Preloader End ***** -->
+
+    <!-- Header -->
+    <header class="">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a class="navbar-brand" href="index.html"><h2>Libreria <em>Dany</em></h2></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu<span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html#carrusell">Inicio
+
+                </a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link"  th:href="@{/libros/lista}">Libros
+
+                </a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link"th:href="@{/autores/lista}" >Autores
+
+                </a>
+              <li class="nav-item">
+                <a class="nav-link" href="index.html#registro">Registrarse</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" th:href="@{/login}">Ingresar</a>
+              </li>
+
+            </ul>
+          </div>
+        </div>
+      </nav>
+    
+
+    <!-- Page Content -->
+
+     <!-- Mensajes de exito o error -->
+    <br>
+      <div class="container m-auto">
+        <div th:if="${exito}!=null" class="card text-white bg-success mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Exito</h5>
+            <p class="card-text" th:text="${exito}"></p>
+          </div>
+        </div>
+        <div th:if="${error}!=null" class="card text-white bg-danger mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Error</h5>
+            <p class="card-text" th:text="${error}"></p>
+          </div>
+        </div>
+      </div>
+    <div class="container-fluid">
+
+        <h5>Dar de baja al Libro:</h5>
+        <br>
+        <table class="card-text" cellpadding="10">
+            <thead>
+                <tr>
+                    <th>Titulo:</th>
+                    <td th:text="${libro.titulo}" colspan="2"></td>
+                </tr>
+                <tr>
+                    <th>Autor:</th>
+                    <td th:text="${libro.autor} == null ? 'sin registro' : ${libro.autor.nombre} "></td>
+                </tr>
+                <tr>
+                    <th>Editorial:</th>
+                    <td th:text="${libro.editorial} == null ? 'sin registro' : ${libro.editorial.nombre} "></td>
+                </tr>
+                <tr>
+                    <th>Ejemplares:</th>
+                    <td th:text="${libro.ejemplares}"></td>
+                </tr>
+            </thead>
+
+        </table>
+        <!-- <form th:action="@{/libros/registroLibro}" method="post" th:object="${libro}">
+                <input hidden th:field="*{id}"> -->
+        <form th:action="@{/libros/borrar}" method="post" th:object="${libro}">
+            <input hidden th:field="*{id}">
+
+        <div class="col-lg-10 col-md-8 mx-auto">
+            <button type="submit" class="btn btn-danger" align="center">BORRAR LIBRO</button>
+            <a th:href="@{/libros/lista}" class="btn btn-warning my-2"><i class="fas fa-user-edit"></i> CANCELAR</a>
+        </div>
+    </form>
+    </div>
+
+
+    </div>
+
+
+
+
+
+
+
+
+    <footer>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="inner-content">
+              <p>Proyecto final de curso de desarrollo web fullstack
+
+            - Design: <a i rel="nofollow noopener" href="https://www.linkedin.com/in/daniel-videla-fullstackdeveloper/" target="_blank">Daniel Videla</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
+    <!-- Additional Scripts -->
+    <script src="assets/js/custom.js"></script>
+    <script src="assets/js/owl.js"></script>
+    <script src="assets/js/slick.js"></script>
+    <script src="assets/js/isotope.js"></script>
+    <script src="assets/js/accordions.js"></script>
+
+
+    <script language = "text/Javascript">
+      cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
+      function clearField(t){                   //declaring the array outside of the
+      if(! cleared[t.id]){                      // function makes it static and global
+          cleared[t.id] = 1;  // you could use true and false, but that's more typing
+          t.value='';         // with more chance of typos
+          t.style.color='#fff';
+          }
+      }
+    </script>
+
+
+  </body>
+
+</html>

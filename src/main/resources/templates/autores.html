@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es-AR" xmlns:th="https://www.thymeleaf.org">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="Daniel Videla">
+        <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+
+        <title>Autores</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+        <!-- Additional CSS Files -->
+        <link rel="stylesheet" href="/css/fontawesome.css">
+        <link rel="stylesheet" href="/css/templatemo-sixteen.css">
+        <link rel="stylesheet" href="/css/owl.css">
+
+    </head>
+
+    <body>
+
+        <!-- ***** Preloader Start ***** 
+        <div id="preloader">
+            <div class="jumper">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+         ***** Preloader End ***** -->
+
+        <!-- Header -->
+        <header class="">
+            <nav class="navbar navbar-expand-lg">
+                <div class="container">
+                    <a class="navbar-brand" href="index.html"><h2>Libreria <em>Dany</em></h2></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu<span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarResponsive">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/}">Inicio
+
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link"  th:href="@{/libros/lista}">Libros
+
+                                </a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link"th:href="@{/autores/1}" >Autores
+                                    <span class="sr-only">(current)</span>
+                                </a>
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/}">Registrarse</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/login}">Ingresar</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+
+            <!-- Page Content -->
+
+            <!-- Banner Ends Here -->
+
+            <div class="container">
+                <div class="container m-auto">
+                    <div th:if="${exito}!=null" class="card text-white bg-success mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Exito</h5>
+                            <p class="card-text" th:text="${exito}"></p>
+                        </div>
+                    </div>
+                    <div th:if="${error}!=null" class="card text-white bg-danger mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Error</h5>
+                            <p class="card-text" th:text="${error}"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mt-3">
+                    <div class="card-header d-flex">
+                        <h1>Lista de Autores</h1>
+                        <a class="btn-dark px-5 py-2 ms-auto" th:href="@{/autores/registroAutor}">Registrar Autor</a>
+                    </div>
+                    <div class="card-body">
+                        <form class="row g-3" th:action="@{/autores/1}" method="GET">
+                            <div class="col">
+                                <input type="text" style="width: 100%;" name="buscar" placeholder="Buscar...">
+                            </div>
+                            <div class="col-2">
+                                <button type="submit" class="btn btn-dark mb-3">Buscar</button>
+                            </div>
+                        </form>
+                        <table class="table table-dark table-striped">
+                            <thead>
+                                <tr>
+                                    <th>N°</th>
+                                    <th>Nombre</th>
+                                    <th>Administracion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="autor : ${autores}">
+                                    <td th:text="${autor.id}"></td>
+                                    <td th:text="${autor.nombre}"></td>
+                                    <td>
+                                        <i th:if="${autor.alta}" class="fa fa-circle text-success"></i>
+                                        <i th:unless="${autor.alta}" class="fa fa-circle" style="color:red;"></i>
+                                        <a class="mx-2" th:href="@{/autor/borrar}+'?id='+${autor.id}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                            </svg></a>
+                                        <a class="mx-2" th:href="@{/autor/registroAutor}+'?id='+${autor.id}"><i class="fa fa-edit"></i></a>
+                                       
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <section class="py-2 text-center container">
+                <div class="row py-lg-2">
+                    <div class="col-lg-10 col-md-8 mx-auto">
+                        <a th:href="@{/}" class="btn btn-primary my-2">INICIO</a>
+                        <a th:href="@{/libros/lista}" class="btn btn-primary my-2">LIBROS</a>
+                        <a th:href="@{/}" class="btn btn-primary my-2">AUTORES</a>
+                        <a th:href="@{/}" class="btn btn-primary my-2">EDITORIALES</a>
+                    </div>
+                </div>
+            </section>
+
+
+
+
+
+
+            <footer>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="inner-content">
+                                <p>Proyecto final de curso de desarrollo web fullstack
+
+                                    - Design: <a i rel="nofollow noopener" href="https://www.linkedin.com/in/daniel-videla-fullstackdeveloper/" target="_blank">Daniel Videla</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+
+            <!-- Bootstrap core JavaScript -->
+            <script src="vendor/jquery/jquery.min.js"></script>
+            <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
+            <!-- Additional Scripts -->
+            <script src="assets/js/custom.js"></script>
+            <script src="assets/js/owl.js"></script>
+            <script src="assets/js/slick.js"></script>
+            <script src="assets/js/isotope.js"></script>
+            <script src="assets/js/accordions.js"></script>
+
+
+            <script language = "text/Javascript">
+                cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
+                function clearField(t){                   //declaring the array outside of the
+                if(! cleared[t.id]){                      // function makes it static and global
+                cleared[t.id] = 1;  // you could use true and false, but that's more typing
+                t.value='';         // with more chance of typos
+                t.style.color='#fff';
+                }
+                }
+            </script>
+
+
+    </body>
+
+</html>
