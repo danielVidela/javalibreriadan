@@ -21,15 +21,19 @@ public interface RepoAutor extends JpaRepositoryImplementation<Autor, String> {
 
     @Query("SELECT a FROM Autor a WHERE a.nombre = :nombre")
     public Autor buscaPorNombre(@Param("nombre") String nombre);
+    
+    @Query ("SELECT a FROM Autor a")
+            public List<Autor> buscaAutor();   
+}
 
-    @Query("SELECT a FROM Autor a")
-    public List<Autor> ListarAutores();
+/*
+   @Query("SELECT c FROM Usuario c WHERE c.mail = :mail")
+    public Usuario buscarPorMail(@Param("mail") String id);
 
-    /*
-   
-
-@Query("SELECT a FROM Autor a WHERE a.nombre LIKE %nombre")
+@Query("SELECT a FROM Autor a WHERE a.nombre LIKE %?1%")
     public List<Autor> buscaPorNombre(@Param("nombre") String nombre);
 
-     */
-}
+
+    @Query ("SELECT a FROM Autor a")
+            public List<Autor> buscaAutor();
+ */

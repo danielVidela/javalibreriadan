@@ -32,12 +32,12 @@ public class EditorialController {
     public String editoriales(ModelMap modelo) {
         List<Editorial> editoriales = editorialServicio.buscaEditoriales();
         modelo.addAttribute("editoriales", editoriales);
-        return "editoriales";
+        return "editoriales.html";
     }
     
     @GetMapping("/registroEditorial")
     public String formulario() {
-        return "nEditorial";
+        return "nEditorial.html";
     }
     
     @PostMapping("/registroEditorial")
@@ -55,7 +55,5 @@ public class EditorialController {
         }
         
     }
-    
-    
-       
-    }
+
+}

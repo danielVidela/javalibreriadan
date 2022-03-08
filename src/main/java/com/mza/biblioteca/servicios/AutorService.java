@@ -38,7 +38,15 @@ public class AutorService {
         aRepo.save(autor);
     }
 
-
+//    @Transactional
+//    public void agregaLibro(Libro libro, Autor autor)throws MiExcepcion {
+//        if(libro!=null && libro.getAutor().equals(autor)){
+//            autor.getLibros().add(libro);
+//            aRepo.save(autor);
+//        }else{
+//            throw new MiExcepcion("No se pudo agregar el autor al Libro");
+//        }
+//    }
     @Transactional(readOnly = true)
     public List<Autor> buscaAutores() {
         return aRepo.findAll();
@@ -50,21 +58,21 @@ public class AutorService {
     }
 
     @Transactional(readOnly = true)
-    public Autor buscaPorId(String id) throws MiExcepcion {
+    public Autor buscaPorId(String id) {
         Optional<Autor> optional = aRepo.findById(id);
         
         if (optional.isPresent())
         {
             return optional.get();
         }else{
-            throw new MiExcepcion("No hay autor con ese id");
+            return null;
         }            
         
     }
 
     private void validar(String nombre) throws MiExcepcion {
 
-        if (nombre.trim().isEmpty() || nombre == null)
+        if (nombre.isEmpty() || nombre == null)
         {
             throw new MiExcepcion("Nombre no valido");
         }
