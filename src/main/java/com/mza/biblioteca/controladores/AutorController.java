@@ -1,8 +1,4 @@
-/*
- * Sin licencia.
- * Uso para capacitación
- * 2021 Año de la Prevención y Lucha contra el COVID-19.
- */
+
 package com.mza.biblioteca.controladores;
 
 import com.mza.biblioteca.entidades.Autor;
@@ -16,10 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-/**
- *
- * @author Adrian E. Camus
- */
 @Controller
 @RequestMapping("/autores")
 public class AutorController {
